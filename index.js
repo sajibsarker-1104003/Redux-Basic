@@ -20,12 +20,22 @@ const rootReducer=(state=initState,action)=>{
 
     }
   }
+  if(action.type==='DEC_NUM'){
+    return{
+      ...state,
+      num:state.num-1
+    }
+  }
   return state;
 }
 
 //Store
 const store=redux.createStore(rootReducer);
 //console.log(store.getState());
+//Subscribe
+store.subscribe(()=>{
+  console.log("[Subscribe]",store.getState());
+})
 //Dispatching
 store.dispatch({
   type:'INC_NUM'
@@ -34,4 +44,8 @@ store.dispatch({
   type:'ADD_NUM',
   value:34
 })
-console.log(store.getState());
+store.dispatch({
+  type:'DEC_NUM'
+})
+
+//console.log(store.getState());
